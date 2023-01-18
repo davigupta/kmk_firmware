@@ -1,4 +1,5 @@
 from kb import KMKKeyboard
+
 from kmk.extensions.LED import LED
 from kmk.keys import KC
 from kmk.modules.layers import Layers as _Layers
@@ -6,6 +7,7 @@ from kmk.modules.tapdance import TapDance
 
 Mydebug = False
 Pico14 = KMKKeyboard()
+
 
 class Layers(_Layers):
     def __init__(self, leds):
@@ -16,11 +18,11 @@ class Layers(_Layers):
     def set_leds(self, keyboard):
         if self._last_top_layer != 0:
             if Mydebug:
-                print("led on")
+                print('led on')
             self._leds.set_brightness(100, leds=[0])
         else:
             if Mydebug:
-                print("led off")
+                print('led off')
             self._leds.set_brightness(0, leds=[0])
 
     def after_hid_send(self, keyboard):
@@ -28,8 +30,9 @@ class Layers(_Layers):
         if keyboard.active_layers[0] != self._last_top_layer:
             self._last_top_layer = keyboard.active_layers[0]
             if Mydebug:
-                print(f"switch layer to {self._last_top_layer}")
+                print(f'switch layer to {self._last_top_layer}')
             self.set_leds(keyboard)
+
 
 tapdance = TapDance()
 tapdance.tap_time = 200
